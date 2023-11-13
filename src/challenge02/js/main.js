@@ -67,6 +67,5 @@ let improvedMethod = text =>
 
     return result;
 }
-
-console.log(simpleMethod("&##&*&@&"));
-console.log(improvedMethod("&##&*&@&"));
+console.log(simpleMethod(prompt("Introduce el texto codificado(1): ")));
+console.log(improvedMethod(prompt("Introduzce el texto codificado(2): ")));
