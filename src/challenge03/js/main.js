@@ -18,10 +18,6 @@ const REGEX = /^(\d+)-(\d+) ([A-Za-z]): ([A-Za-z]+)$/;
  */
 let isValid = info => 
 {
-    let minAppearance = 0;
-    let maxAppearance = 0;
-    let searchedCharacter;
-    let key = "";
     let isValid = false;
     let appearance = 0;
     let groups = [];
@@ -29,10 +25,7 @@ let isValid = info =>
     if (info !== null && typeof info === "string" && REGEX.test(info)) 
     {
         groups = REGEX.exec(info);
-        minAppearance = groups[1];
-        maxAppearance = groups[2];
-        searchedCharacter = groups[3];
-        key = groups[4];
+        const [ ,minAppearance, maxAppearance, searchedCharacter, key] = groups;
 
         appearance = Array.from(key).filter(currentValue => currentValue === searchedCharacter).length;
 
