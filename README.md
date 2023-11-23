@@ -10,8 +10,8 @@ Solución a los desafíos de [codember](https://codember.dev/) creado por [@midu
 
 # Tabla de retos
 
-| Challenge |                                   Solución                                   |
+| Challenge |                                  Solución                                   |
 | :-------: | :--------------------------------------------------------------------------: |
-|    #01    | [JavaScript](src/challenge01/js/main.js)<br/>[Java](src/challenge01/java/App.java) |
-|    #02    | [JavaScript](src/challenge02/js/main.js)<br/>[Java](src/challenge02/java/App.java) |
-|    #03    | [JavaScript](src/challenge03/js/main.js)<br/>[Java](src/challenge03/java/App.java) |
+|    [#01](src/challenge01)    |[JavaScript](src/challenge01/js/main.js)<br/>[Java](src/challenge01/java/App.java) |
+|    [#02](src/challenge02)    |[JavaScript](src/challenge02/js/main.js)<br/>[Java](src/challenge02/java/App.java) |
+|    [#03](src/challenge03)    |[JavaScript](src/challenge03/js/main.js)<br/>[Java](src/challenge03/java/App.java) |
