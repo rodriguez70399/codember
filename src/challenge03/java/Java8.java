@@ -4,21 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
- * Clase con la solucion al Challenge 03 usando metodos de Java 8
+ * Clase principal que resuelve el Challenge 03 utilizando métodos de Java 8.
+ * Se encarga de validar y buscar contraseñas en un archivo según ciertas políticas.
  */
 public class Java8 
 {
     private final static String REGEX = "^(\\d+)-(\\d+) ([A-Za-z]): ([A-Za-z]+)$";
-    private final static Pattern PATTERN = Pattern.compile(REGEX);
-    
+    private final static Pattern PATTERN = Pattern.compile(REGEX);    
 
     /**
      * Método que comprueba si una clave cumple con su política
@@ -67,14 +64,33 @@ public class Java8
      *  nos saltamos las anteriores al índice indicado y obtenemos el elemento. Finalmente, obtenemos solo la clave usando split.
      * </p>
      * 
-     * @param lines Lista de claves con sus políticas en una sola línea.
+     * @param filePath Url del archivo que contiene la lista de claves y sus políticas.
      * @param index Índice de la clave buscada.
      * @return Clave inválida indicada.
      */
-    public static String findInvalidPassword(List<String> lines, int index)
+    public static String findInvalidPassword(String filePath, int index)
     {
-        String info = lines.stream().filter(line -> !Java8.isValid(line)).skip(index-1).findFirst().orElse(null);
-        return Objects.nonNull(info) ? info.split(" ")[2] : null;
+        String info = "";
+        
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(filePath).openStream())))
+        {
+            info = bufferedReader
+            .lines()
+            .filter(line -> !Java8.isValid(line))
+            .skip(index-1)
+            .findFirst()
+            .orElse("");
+        } 
+        catch (IOException ioException) 
+        {
+            System.out.println("\nError de entrada/salida: " + ioException.getMessage());
+        }
+        catch (Exception exception)
+        {
+            System.out.println("\nSe ha producido un error: " + exception.getMessage());
+        }
+        
+        return info.isEmpty() ? "" : info.split(" ")[2]; 
     }
 
     /**
@@ -85,26 +101,22 @@ public class Java8
      *  nos saltamos las anteriores al índice indicado y obtenemos el elemento. Finalmente, obtenemos solo la clave usando split.
      * </p>
      * 
-     * @param lines Lista de claves con sus políticas en una sola línea.
+     * @param filePath Url del archivo que contiene la lista de claves y sus políticas.
      * @param index Índice de la clave buscada.
      * @return Clave válida indicada.
      */
-    public static String findValidPassword(List<String> lines, int index)
+    public static String findValidPassword(String filePath, int index)
     {
-        String info = lines.stream().filter(line -> Java8.isValid(line)).skip(index-1).findFirst().orElse(null);
-        return Objects.nonNull(info) ? info.split(" ")[2] : null;
-    }
-
-    public static void main(String[] args) 
-    {
-        List<String> keys;
-        final String FILE_PATH = "https://codember.dev/data/encryption_policies.txt";
-        final int SEARCHED_KEY = 13;
-
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(FILE_PATH).openStream())))
+        String info = "";
+        
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new URL(filePath).openStream())))
         {
-            keys = bufferedReader.lines().collect(Collectors.toCollection(ArrayList::new));
-            System.out.println(Java8.findInvalidPassword(keys, SEARCHED_KEY));
+            info = bufferedReader
+            .lines()
+            .filter(line -> Java8.isValid(line))
+            .skip(index-1)
+            .findFirst()
+            .orElse("");
         } 
         catch (IOException ioException) 
         {
@@ -114,5 +126,15 @@ public class Java8
         {
             System.out.println("\nSe ha producido un error: " + exception.getMessage());
         }
+        
+        return info.isEmpty() ? "" : info.split(" ")[2];
+    }
+
+    public static void main(String[] args) 
+    {
+        final String FILE_PATH = "https://codember.dev/data/encryption_policies.txt";
+        final int SEARCHED_KEY = 42;
+
+        System.out.println(Java8.findInvalidPassword(FILE_PATH, SEARCHED_KEY));
     }   
 }

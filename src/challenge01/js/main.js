@@ -37,7 +37,7 @@ function oldMethod(text)
     let wordCount = getWordCount(text);
     let result = [];
 
-    for (let [key, value] of wordCount) 
+    for ([key, value] of wordCount) 
     {
         result.push(key, value);
     }

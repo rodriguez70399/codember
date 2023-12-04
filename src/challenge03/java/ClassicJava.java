@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * Clase con la solucion al Challenge 03 usando metodos simples de java
+ * Clase que implementa la solucion para el Challenge 03 usando metodos simples de java.
  */
 public class ClassicJava 
 {
