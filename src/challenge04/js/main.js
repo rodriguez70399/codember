@@ -65,7 +65,7 @@ let getRealFile = async (listPath, index) =>
 
         if (!response.ok) 
         {
-            throw new Error("Error not found");
+            throw new Error("File not found");
         }
 
         data = await response.text();

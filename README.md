@@ -16,3 +16,4 @@ Solución a los desafíos de [codember](https://codember.dev/) creado por [@midu
 |    [#02](src/challenge02)    |[JavaScript](src/challenge02/js/main.js)<br/>[Java](src/challenge02/java/App.java) |
 |    [#03](src/challenge03)    |[JavaScript](src/challenge03/js/main.js)<br/>[Classic Java](src/challenge03/java/ClassicJava.java) / [Java 8](src/challenge03/java/Java8.java) |
 |    [#04](src/challenge04)    |[JavaScript](src/challenge04/js/main.js)<br/>[Classic Java](src/challenge04/java/ClassicJava.java) / [Java 8](src/challenge04/java/Java8.java) |
+|    [#05](src/challenge05)    |[JavaScript](src/challenge05/js/main.js)<br/>[Classic Java](src/challenge05/java/ClassicJava.java) / [Java 8](src/challenge05/java/Java8.java) |

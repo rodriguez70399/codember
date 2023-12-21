@@ -44,29 +44,28 @@ public class ClassicJava
         char searchedCharacter = ' ';
         String key = null;
         int appearance = 0;
-        boolean isValid = false;
 
-        if (Objects.nonNull(info) && PATTERN.matcher(info).matches()) 
+        if (Objects.isNull(info) || !PATTERN.matcher(info).matches()) 
         {
-            splitedInfo = info.split(" ");
-            appearanceRange = splitedInfo[0].split("-");
-            minAppearance = Integer.parseInt(appearanceRange[0]);
-            maxAppearance = Integer.parseInt(appearanceRange[1]);
-            searchedCharacter = splitedInfo[1].charAt(0);
-            key = splitedInfo[2];
+            return false;
+        }
+            
+        splitedInfo = info.split(" ");
+        appearanceRange = splitedInfo[0].split("-");
+        minAppearance = Integer.parseInt(appearanceRange[0]);
+        maxAppearance = Integer.parseInt(appearanceRange[1]);
+        searchedCharacter = splitedInfo[1].charAt(0);
+        key = splitedInfo[2];
     
-            for (int i = 0; i < key.length(); i++) 
+        for (int i = 0; i < key.length(); i++) 
+        {
+            if (key.charAt(i) == searchedCharacter)
             {
-                if (key.charAt(i) == searchedCharacter)
-                {
-                    appearance++;
-                }
+                appearance++;
             }
-    
-            isValid = appearance >= minAppearance && appearance <= maxAppearance;        
         }
 
-        return isValid;
+        return appearance >= minAppearance && appearance <= maxAppearance;
     }
 
     /**

@@ -22,46 +22,45 @@ public class ClassicJava
      */
     private static boolean isValidV1(String fileName)
     {
-        boolean isValid = false;
         boolean isRepeated;
         int appearance;
         String leftPart = "";
         String checksum = "";
         StringBuilder correctChecksum = new StringBuilder();
 
-        if (Objects.nonNull(fileName) && fileName.split("-").length == 2) 
+        if (Objects.isNull(fileName) || fileName.split("-").length != 2) 
         {
-            leftPart = fileName.split("-")[0];
-            checksum = fileName.split("-")[1];
+            return false;
+        }
 
-            for (int i = 0; i < leftPart.length(); i++) 
+        leftPart = fileName.split("-")[0];
+        checksum = fileName.split("-")[1];
+
+        for (int i = 0; i < leftPart.length(); i++) 
+        {
+            isRepeated = false;
+            appearance = 0;
+
+            for (int j = 0; j < leftPart.length() && !isRepeated; j++) 
             {
-                isRepeated = false;
-                appearance = 0;
-
-                for (int j = 0; j < leftPart.length() && !isRepeated; j++) 
+                if (leftPart.charAt(i) == leftPart.charAt(j)) 
                 {
-                    if (leftPart.charAt(i) == leftPart.charAt(j))
-                    {
-                        appearance++;                        
-                    }    
-
-                    if (appearance > 1) 
-                    {
-                        isRepeated = true;                    
-                    }
+                    appearance++;
                 }
 
-                if (appearance == 1) 
+                if (appearance > 1) 
                 {
-                    correctChecksum.append(leftPart.charAt(i));
+                    isRepeated = true;
                 }
             }
 
-            isValid = checksum.equals(correctChecksum.toString());
+            if (appearance == 1) 
+            {
+                correctChecksum.append(leftPart.charAt(i));
+            }
         }
 
-        return isValid;
+        return checksum.equals(correctChecksum.toString());
     }
 
     /**
@@ -73,7 +72,6 @@ public class ClassicJava
      */
     private static boolean isValidV2(String fileName)
     {
-        boolean isValid = false;
         String leftPart = "";
         String checksum = "";
         char currentCharacter = ' ';
@@ -82,27 +80,27 @@ public class ClassicJava
 
         if (Objects.nonNull(fileName) && fileName.split("-").length == 2) 
         {
-            leftPart = fileName.split("-")[0];
-            checksum = fileName.split("-")[1];
+            return false;
+        }
+    
+        leftPart = fileName.split("-")[0];
+        checksum = fileName.split("-")[1];
 
-            for (int i = 0; i < leftPart.length(); i++) 
+        for (int i = 0; i < leftPart.length(); i++) 
+        {
+            currentCharacter = leftPart.charAt(i);
+
+            if (repeatedCharacters.indexOf(currentCharacter) == -1 && leftPart.indexOf(currentCharacter, i+1) == -1) 
             {
-                currentCharacter = leftPart.charAt(i);
-
-                if (repeatedCharacters.indexOf(currentCharacter) == -1 && leftPart.indexOf(currentCharacter, i+1) == -1) 
-                {
-                    correctChecksum.append(currentCharacter);                    
-                }
-                else
-                {
-                    repeatedCharacters.add(currentCharacter);
-                }   
+                correctChecksum.append(currentCharacter);                    
             }
-
-            isValid = checksum.equals(correctChecksum.toString());
+            else
+            {
+                repeatedCharacters.add(currentCharacter);
+            }   
         }
 
-        return isValid;
+        return checksum.equals(correctChecksum.toString());
     }
 
     /**
